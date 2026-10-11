@@ -10,4 +10,29 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  build: {
+    rolldownOptions: {
+      output: {
+        codeSplitting: {
+          groups: [
+            {
+              name: 'maplibre',
+              test: /[\\/]node_modules[\\/]maplibre-gl[\\/]/,
+              priority: 30,
+            },
+            {
+              name: 'charts',
+              test: /[\\/]node_modules[\\/](recharts|d3|d3-[^\\/]+|chart\.js|echarts)[\\/]/,
+              priority: 25,
+            },
+            {
+              name: 'vendor',
+              test: /[\\/]node_modules[\\/]/,
+              priority: 5,
+            },
+          ],
+        },
+      },
+    },
+  },
 });
