@@ -3,6 +3,7 @@ import { WeatherDataStatus } from '@/modules/data-access/ui/WeatherDataStatus';
 import { LayerToggle } from '@/features/layer-toggle/ui/LayerToggle';
 import { TimelineControl } from '@/features/timeline-control/ui/TimelineControl';
 import { WeatherMap } from '@/modules/map/ui/WeatherMap';
+import { WeatherChart } from '@/modules/analytics/ui/WeatherChart';
 
 function App() {
   return (
@@ -22,11 +23,11 @@ function App() {
             <LayerToggle />
             <WeatherDataStatus />
           </aside>
-
+          
           <section className="space-y-6">
             <WeatherMap />
-
             <TimelineControl />
+            <WeatherChart />
           </section>
         </div>
       </main>
