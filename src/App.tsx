@@ -2,6 +2,7 @@ import { AppProvider } from '@/app/providers/AppProvider';
 import { WeatherDataStatus } from '@/modules/data-access/ui/WeatherDataStatus';
 import { LayerToggle } from '@/features/layer-toggle/ui/LayerToggle';
 import { TimelineControl } from '@/features/timeline-control/ui/TimelineControl';
+import { WeatherMap } from '@/modules/map/ui/WeatherMap';
 
 function App() {
   return (
@@ -23,16 +24,7 @@ function App() {
           </aside>
 
           <section className="space-y-6">
-            <div className="flex min-h-72 items-center justify-center rounded-xl border border-dashed border-slate-700 bg-slate-900/50 p-6 text-center">
-              <div>
-                <p className="font-medium text-slate-300">
-                  Здесь появится интерактивная карта
-                </p>
-                <p className="mt-2 text-sm text-slate-500">
-                  Следующим шагом подключим MapLibre GL JS
-                </p>
-              </div>
-            </div>
+            <WeatherMap />
 
             <TimelineControl />
           </section>
