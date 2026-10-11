@@ -1,4 +1,6 @@
+
 import { useEffect } from 'react';
+import { toast } from 'sonner';
 
 import {
     useAppDispatch,
@@ -14,10 +16,15 @@ export function WeatherDataLoader() {
 
     useEffect(() => {
         const controller = new AbortController();
+        const toastId = `weather-data-${retryCount}`;
 
         dispatch({
             loadingStatus: 'loading',
             error: null,
+        });
+
+        toast.loading('Загружаем данные о погоде...', {
+            id: toastId,
         });
 
         async function loadData() {
@@ -31,15 +38,28 @@ export function WeatherDataLoader() {
                     loadingStatus: 'success',
                     error: null,
                 });
+
+                toast.success('Данные о погоде загружены', {
+                    id: toastId,
+                    duration: 2000,
+                });
             } catch (error) {
                 if (controller.signal.aborted) return;
 
+                const message =
+                    error instanceof Error
+                        ? error.message
+                        : 'Не удалось загрузить погодные данные';
+
                 dispatch({
                     loadingStatus: 'error',
-                    error:
-                        error instanceof Error
-                            ? error.message
-                            : 'Не удалось загрузить погодные данные',
+                    error: message,
+                });
+
+                toast.error('Не удалось загрузить данные о погоде', {
+                    id: toastId,
+                    description: message,
+                    duration: 5000,
                 });
             }
         }
