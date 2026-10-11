@@ -1,5 +1,5 @@
 import { AppProvider } from '@/app/providers/AppProvider';
-import { LoaderCircle } from 'lucide-react';
+import { WeatherDataStatus } from '@/modules/data-access/ui/WeatherDataStatus';
 
 function App() {
   return (
@@ -14,11 +14,8 @@ function App() {
           </p>
         </header>
 
-        <section className="p-6 flex items-center justify-center gap-2">
-          <LoaderCircle className="animate-spin text-slate-400" />
-          <p className="text-slate-400">
-            Подготавливаем карту и аналитику...
-          </p>
+        <section className="p-6">
+          <WeatherDataStatus />
         </section>
       </main>
     </AppProvider>
