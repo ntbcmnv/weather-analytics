@@ -29,14 +29,16 @@ export function TimelineControl() {
     );
 
     useEffect(() => {
-        if (!isPlaying || timePoints.length < 2) return;
-
-        if (safeIndex >= timePoints.length - 1) {
-            setIsPlaying(false);
+        if (!isPlaying || timePoints.length < 2) {
             return;
         }
 
         const intervalId = window.setInterval(() => {
+            if (safeIndex >= timePoints.length - 1) {
+                setIsPlaying(false);
+                return;
+            }
+
             dispatch({ selectedTimeIndex: safeIndex + 1 });
         }, 1000);
 
@@ -44,8 +46,10 @@ export function TimelineControl() {
     }, [isPlaying, safeIndex, timePoints.length, dispatch]);
 
     useEffect(() => {
-        setIsPlaying(false);
-    }, [dataset]);
+        if (timePoints.length === 0 && isPlaying) {
+            return;
+        }
+    }, [timePoints.length, isPlaying]);
 
     if (!timePoints.length) {
         return (
