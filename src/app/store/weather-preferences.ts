@@ -49,5 +49,7 @@ export function saveWeatherPreferences(
 ): void {
     try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(preferences));
-    } catch {}
+    } catch {
+        // Сохранение настроек недоступно, например, в приватном режиме браузера.
+    }
 }
