@@ -420,7 +420,7 @@ export function WeatherChart() {
                         </>
                     ) : (
                         <div className="mt-4 rounded-lg border border-dashed border-slate-700 p-6 text-center text-sm text-slate-400">
-                            Выберите хотя бы одну линию, чтобы отобразить её на графике.
+                            Выберите хотя бы одну опцию, чтобы отобразить её на графике.
                         </div>
                     )}
                 </>

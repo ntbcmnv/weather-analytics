@@ -76,12 +76,6 @@ async function fetchLocationForecast(
         { signal },
     );
 
-    if (!response.ok) {
-        throw new Error(
-            `Не удалось загрузить погоду для города ${location.name}`,
-        );
-    }
-
     const data = (await response.json()) as OpenMeteoResponse;
 
     if (
@@ -89,7 +83,7 @@ async function fetchLocationForecast(
         !Array.isArray(data.hourly.time) ||
         data.hourly.time.length === 0
     ) {
-        throw new Error(`API вернул некорректные данные для ${location.name}`);
+        throw new Error(`Не удалось получить погодные данные для города ${location.name}`);
     }
 
     return { location, response: data };

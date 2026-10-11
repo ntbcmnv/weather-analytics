@@ -16,6 +16,7 @@
     "react-dom": "^19.2.8",
     "react-map-gl": "^8.1.3",
     "recharts": "^3.10.1",
+    "sonner": "^2.0.8",
     "vedro": "^1.1.0"
   },
   "devDependencies": {
