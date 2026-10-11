@@ -1,10 +1,16 @@
 import { useEffect } from 'react';
 
-import { useAppDispatch } from '@/app/store';
+import {
+    useAppDispatch,
+    useAppSelector,
+} from '@/app/store';
+
 import { getWeatherDataset } from '@/modules/data-access/api/weather-api';
 
 export function WeatherDataLoader() {
     const dispatch = useAppDispatch();
+
+    const retryCount = useAppSelector((state) => state.retryCount);
 
     useEffect(() => {
         const controller = new AbortController();
@@ -18,19 +24,15 @@ export function WeatherDataLoader() {
             try {
                 const dataset = await getWeatherDataset(controller.signal);
 
-                if (controller.signal.aborted) {
-                    return;
-                }
+                if (controller.signal.aborted) return;
 
                 dispatch({
                     dataset,
                     loadingStatus: 'success',
-                    selectedTimeIndex: 0,
+                    error: null,
                 });
             } catch (error) {
-                if (controller.signal.aborted) {
-                    return;
-                }
+                if (controller.signal.aborted) return;
 
                 dispatch({
                     loadingStatus: 'error',
@@ -47,7 +49,7 @@ export function WeatherDataLoader() {
         return () => {
             controller.abort();
         };
-    }, [dispatch]);
+    }, [dispatch, retryCount]);
 
     return null;
 }

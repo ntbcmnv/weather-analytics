@@ -36,7 +36,7 @@ export const WEATHER_LAYERS: WeatherLayerConfig[] = [
         name: 'Инсоляция',
         unit: 'Вт/м²',
         type: 'heatmap',
-        color: '#facc15',
+        color: '#a78bfa',
         min: 0,
         max: 1200,
     },
